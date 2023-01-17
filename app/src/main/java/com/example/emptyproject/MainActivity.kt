@@ -1,7 +1,7 @@
 package com.example.emptyproject
 
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.emptyproject.databinding.ActivityMainBinding
@@ -21,10 +21,7 @@ class MainActivity : AppCompatActivity() {
                 imagesList.size
             )
         ]
-        Glide.with(this)
-            .load(imageUrl)
-            .into(binding.mainIV)
-
+        binding.mainIV.load(imageUrl)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -41,5 +38,11 @@ class MainActivity : AppCompatActivity() {
             "https://psyfactor.org/lib/i/xrorschach_test_2.jpg.pagespeed.ic.SjRMzAv44v.webp",
             "https://psyfactor.org/lib/i/xrorschach_test_4.jpg.pagespeed.ic.c8Xn8M-s1g.webp"
         )
+    }
+
+    fun ImageView.load(url: String) {
+        Glide.with(this@MainActivity)
+            .load(url)
+            .into(this)
     }
 }
