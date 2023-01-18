@@ -10,10 +10,48 @@
         android:id="@+id/main_IV"
         android:layout_width="192dp"
         android:layout_height="192dp"
-        app:layout_constraintDimensionRatio="@string/square"
         android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="@string/square"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:textAppearance="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/login"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="@id/main_IV"
+        app:layout_constraintStart_toStartOf="@id/main_IV"
+        app:layout_constraintTop_toBottomOf="@id/main_IV">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText"
+
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayout"
+        app:layout_constraintStart_toStartOf="@id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputPasswordEditText"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
