@@ -1,13 +1,16 @@
 package com.example.emptyproject
 
+import android.inputmethodservice.InputMethodService
 import android.os.Bundle
 import android.text.Editable
+import android.util.Patterns.EMAIL_ADDRESS
+import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.example.emptyproject.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -25,20 +28,39 @@ class MainActivity : AppCompatActivity() {
             )
         ]
         binding.mainIV.load(imageUrl)
+        listener()
 
         binding.textInputEditText.addTextChangedListener(object : SimpleTextWatcher() {
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                super.onTextChanged(s, p1, p2, p3)
+                binding.loginButton.isEnabled = true
+                binding.textInputLayout.isErrorEnabled = false
+            }
+
             override fun afterTextChanged(s: Editable?) {
-                val valid = android.util.Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()
-                binding.textInputLayout.isErrorEnabled = !valid
-                val error = if (valid) "" else getString(R.string.invalid_email_message)
-                binding.textInputLayout.error = error
-                if (valid) Toast.makeText(
-                    this@MainActivity,
-                    R.string.valid_email_message,
-                    Toast.LENGTH_SHORT
-                ).show()
+                val input = s.toString()
+                if (input.endsWith("@g")) {
+                    val fullMail = "${input}mail.com"
+                    binding.textInputEditText.setText(fullMail)
+                }
             }
         })
+    }
+
+    private fun AppCompatActivity.hideSoftKeyboard(view: View) {
+        val imm = this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodService
+    }
+
+    private fun listener() {
+        binding.loginButton.setOnClickListener {
+            if (EMAIL_ADDRESS.matcher(binding.textInputEditText.text.toString()).matches()) {
+                binding.loginButton.isEnabled = false
+                Snackbar.make(binding.loginButton, "Go to postLogin", Snackbar.LENGTH_SHORT).show()
+            } else {
+                binding.textInputLayout.isErrorEnabled = true
+                binding.textInputLayout.error = getString(R.string.invalid_email_message)
+            }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

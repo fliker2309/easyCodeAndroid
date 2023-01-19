@@ -54,4 +54,16 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:id="@+id/loginButton"
+        android:text="@string/login"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/textInputPasswordLayout"
+        app:layout_constraintEnd_toEndOf="@id/textInputPasswordLayout"
+        app:layout_constraintTop_toBottomOf="@id/textInputPasswordLayout"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
