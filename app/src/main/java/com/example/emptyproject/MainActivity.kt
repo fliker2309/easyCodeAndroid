@@ -1,10 +1,8 @@
 package com.example.emptyproject
 
-import android.inputmethodservice.InputMethodService
 import android.os.Bundle
 import android.text.Editable
 import android.util.Patterns.EMAIL_ADDRESS
-import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -47,11 +45,11 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun AppCompatActivity.hideSoftKeyboard(view: View) {
-        val imm = this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodService
-    }
-
     private fun listener() {
+        binding.loginButton.isEnabled = false
+        binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
+            binding.loginButton.isEnabled = true
+        }
         binding.loginButton.setOnClickListener {
             if (EMAIL_ADDRESS.matcher(binding.textInputEditText.text.toString()).matches()) {
                 binding.loginButton.isEnabled = false
@@ -79,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    fun ImageView.load(url: String) {
+    private fun ImageView.load(url: String) {
         Glide.with(this@MainActivity)
             .load(url)
             .into(this)
