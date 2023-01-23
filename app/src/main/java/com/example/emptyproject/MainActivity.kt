@@ -3,6 +3,7 @@ package com.example.emptyproject
 import android.os.Bundle
 import android.text.Editable
 import android.util.Patterns.EMAIL_ADDRESS
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -53,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             if (EMAIL_ADDRESS.matcher(binding.textInputEditText.text.toString()).matches()) {
                 binding.loginButton.isEnabled = false
+
+                binding.progressbar.visibility = View.VISIBLE
                 Snackbar.make(binding.loginButton, "Go to postLogin", Snackbar.LENGTH_SHORT).show()
             } else {
                 binding.textInputLayout.isErrorEnabled = true
