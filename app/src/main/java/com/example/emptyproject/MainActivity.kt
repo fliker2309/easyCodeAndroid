@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     private fun listener() {
         binding.loginButton.isEnabled = false
         binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
-            binding.loginButton.isEnabled = true
+            binding.loginButton.isEnabled = isChecked
         }
         binding.loginButton.setOnClickListener {
             if (EMAIL_ADDRESS.matcher(binding.textInputEditText.text.toString()).matches()) {
