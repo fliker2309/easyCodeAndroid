@@ -1,6 +1,5 @@
 package com.example.emptyproject
 
-import android.inputmethodservice.InputMethodService
 import android.os.Bundle
 import android.text.Editable
 import android.util.Patterns.EMAIL_ADDRESS
@@ -47,14 +46,16 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun AppCompatActivity.hideSoftKeyboard(view: View) {
-        val imm = this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodService
-    }
-
     private fun listener() {
+        binding.loginButton.isEnabled = false
+        binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
+            binding.loginButton.isEnabled = isChecked
+        }
         binding.loginButton.setOnClickListener {
             if (EMAIL_ADDRESS.matcher(binding.textInputEditText.text.toString()).matches()) {
                 binding.loginButton.isEnabled = false
+
+                binding.progressbar.visibility = View.VISIBLE
                 Snackbar.make(binding.loginButton, "Go to postLogin", Snackbar.LENGTH_SHORT).show()
             } else {
                 binding.textInputLayout.isErrorEnabled = true
@@ -79,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    fun ImageView.load(url: String) {
+    private fun ImageView.load(url: String) {
         Glide.with(this@MainActivity)
             .load(url)
             .into(this)
