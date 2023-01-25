@@ -14,6 +14,8 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
+    private var state = INITIAL
+
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var imageUrl: String
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             if (EMAIL_ADDRESS.matcher(binding.textInputEditText.text.toString()).matches()) {
                 binding.loginButton.isEnabled = false
 
+
                 binding.progressbar.visibility = View.VISIBLE
                 Snackbar.make(binding.loginButton, "Go to postLogin", Snackbar.LENGTH_SHORT).show()
             } else {
@@ -70,6 +73,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val INITIAL = 0
+        const val PROGRESS = 1
+        const val success = 2
+        const val FAILED = 3
 
         const val KEY_IMAGE_URL = "KEY_IMAGE_URL"
         val imagesList = listOf(
